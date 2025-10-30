@@ -1,0 +1,8 @@
+
+zsystem:
+  hosts:
+    zvm:
+      ansible_user: "{{ lookup('env', 'MY_USER') }}"
+      ansible_host: "{{ lookup('env', 'MY_HOST') }}"
+      ansible_python_interpreter: "/allpython/3.12/usr/lpp/IBM/cyp/v3r12/pyz/bin/python3"
+

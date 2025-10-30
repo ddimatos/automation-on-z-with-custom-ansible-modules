@@ -1,0 +1,21 @@
+# SET ZOAU Environment Variables
+export ZOAU_HOME=/zoau/v1.4.0
+export PATH=${ZOAU_HOME}/bin:${PYTHON_HOME}/bin:${PATH}
+export LIBPATH=${ZOAU_HOME}/lib:${LIBPATH}
+export PYTHONPATH=${ZOAU_HOME}/lib/3.12:${PYTHONPATH}:/tmp/lib/
+export MANPATH=${ZOAU_HOME}/docs/%L:${MANPATH}
+export _BPXK_AUTOCVT=ON
+
+# Set Python Environment Vars
+export PYTHON_HOME=/allpython/3.12/usr/lpp/IBM/cyp/v3r12/pyz
+export PYTHON=${PYTHON_HOME}/bin
+export PATH=$PATH:${PYTHON_HOME}/bin
+export _CEE_RUNOPTS="FILETAG(AUTOCVT,AUTOTAG) POSIX(ON)"
+export _TAG_REDIR_IN=txt
+export _TAG_REDIR_ERR=txt
+export _TAG_REDIR_OUT=txt
+export LANG=C
+
+# Personal Choice Terminal Options
+TERM=dtterm
+PS1="[ $LOGNAME:$PWD: ]"
