@@ -1,0 +1,16 @@
+namespace: ddimatos
+name: zos_modules
+version: 1.0.0
+readme: README.md
+authors:
+- Demetrios Dimatos <ddimatos@us.ibm.com>
+description: z/OS modules
+license:
+- "Apache-2.0"
+repository: https://github.com/ddimatos/accelerate-automation-with-python-and-zoau
+documentation: https://github.com/ddimatos/accelerate-automation-with-python-and-zoau
+homepage: https://github.com/ddimatos/accelerate-automation-with-python-and-zoau
+issues: https://github.com/ddimatos/accelerate-automation-with-python-and-zoau/issues
+build_ignore: []
+
+

@@ -1,0 +1,20 @@
+---
+- name: Test zos_dconcat playbook
+  hosts: all
+  gather_facts: false
+  environment: "{{ environment_vars }}"
+  vars:
+    src: "employee.source.seq"
+    change: "employee.added.seq"
+    merge: "employee.all.seq"
+
+  tasks:
+    - name: "Diff {{ src }} with {{ change }} and append differences to {{ src }}"
+      ddimatos.zos_modules.zos_dconcat:
+        src: "{{ src }}"
+        change: "{{ change }}"
+      register: result
+
+    - name: Print result
+      ansible.builtin.debug:
+        msg: "{{ result.stdout_lines }}"
