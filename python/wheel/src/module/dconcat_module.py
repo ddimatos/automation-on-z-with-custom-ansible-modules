@@ -1,7 +1,7 @@
 from zoautil_py import datasets
 
 # Difference concatenation utility
-def dconcat(source: str = None, change:str = None, merge: str = None, reverse: bool = False) -> None:
+def dconcat(source: str = None, change:str = None, merge: str = None, reverse: bool = False) -> int:
    """
    This utility will find the differences between two datasets will concatenate the
    changes to the source dataset (default).
@@ -51,7 +51,8 @@ def dconcat(source: str = None, change:str = None, merge: str = None, reverse: b
          # Case: DS1 and DS2 are diffed and inserted into DS1
          for source_line in source_lines:
             datasets.write(source, source_line, True)
-
+      return 0
+   
 # Print the source dataset differences
 def ddiff_source(source: str = None, change:str = None) -> str:
     """

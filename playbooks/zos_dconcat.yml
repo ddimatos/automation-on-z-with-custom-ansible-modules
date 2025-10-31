@@ -15,6 +15,10 @@
         change: "{{ change }}"
       register: result
 
+    # - name: Return motd to registered var
+    #   ansible.builtin.command: echo "$PYTHONPATH"
+    #   register: result
+
     - name: Print result
       ansible.builtin.debug:
         msg: "{{ result.stdout_lines }}"

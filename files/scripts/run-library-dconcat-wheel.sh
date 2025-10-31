@@ -21,14 +21,14 @@ fi
 # ---------------------------------------------------------------------
 # Export the custom module library path to Ansible
 # ---------------------------------------------------------------------
-setup
 echo "${SEP_LINE_NL}[INFO] Sharing the custom module library path with Ansible.${SEP_LINE_NL}"
-export ANSIBLE_LIBRARY=${MY_ANSIBLE_LIBRARY:=$ANSIBLE_LIBRARY}
+export ANSIBLE_LIBRARY=${MY_ANSIBLE_LIBRARY_WHEEL:=$ANSIBLE_LIBRARY}
+echo $ANSIBLE_LIBRARY
 
 # ---------------------------------------------------------------------
 # Run Ansible Playbook
 # ---------------------------------------------------------------------
-
+setup
 echo "${SEP_LINE_NL}[INFO] Run Custom Anaible module with module default${SEP_LINE_NL}"
 ansible-playbook -i ../../playbooks/inventory ../../playbooks/zos_dconcat.yml
 
@@ -39,6 +39,3 @@ ansible-playbook -i ../../playbooks/inventory ../../playbooks/zos_dconcat_merge.
 setup
 echo "${SEP_LINE_NL}[INFO] Run Custom Anaible module with reverse option${SEP_LINE_NL}"
 ansible-playbook -i ../../playbooks/inventory ../../playbooks/zos_dconcat_reverse.yml
-
-echo "${SEP_LINE_NL}[INFO] Demonstrate module doc.${SEP_LINE_NL}"
-#ansible-doc zos_dconcat
