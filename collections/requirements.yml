@@ -1,0 +1,4 @@
+---
+collections:
+  - name: ddimatos.zos_modules
+  - name: ibm.ibm_zos_core
