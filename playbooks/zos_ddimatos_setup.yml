@@ -63,7 +63,7 @@
         msg: "{{ result }}"
 
     - name: Create a sequential data set if it does not exist
-      zos_data_set:
+      ibm.ibm_zos_core.zos_data_set:
         name: "{{ merge }}"
         type: seq
         state: present
