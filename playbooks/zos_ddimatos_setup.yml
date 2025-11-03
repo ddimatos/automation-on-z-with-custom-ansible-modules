@@ -1,0 +1,83 @@
+---
+- name: Test zos_dconcat playbook
+  hosts: all
+  gather_facts: false
+  environment: "{{ environment_vars }}"
+  vars:
+    src: "employee.source.seq"
+    change: "employee.added.seq"
+    merge: "employee.all.seq"
+    tmp_file: "/tmp/tmp.txt"
+
+  tasks:
+    - name: "Removing column headers from data 1"
+      ansible.builtin.shell: "/usr/bin/tail -n +3 ../files/data/{{ src }} > {{ tmp_file }}"
+      delegate_to: localhost
+
+    - name: "Copy data to zos data set"
+      ibm.ibm_zos_core.zos_copy:
+        src: "{{ tmp_file }}"
+        dest: "{{ src }}"
+        remote_src: false
+        encoding:
+          from: UTF-8
+          to: IBM-037
+        force: true
+        dest_data_set:
+          type: seq
+          space_primary: 5
+          space_secondary: 1
+          space_type: k
+          record_length: 80
+      register: result
+
+    - name: Print result
+      ansible.builtin.debug:
+        msg: "{{ result }}"
+      register: result
+
+    - name: "Removing column headers from data"
+      ansible.builtin.shell: "/usr/bin/tail -n +3 ../files/data/{{ change }} > {{ tmp_file }}"
+      register: result
+      delegate_to: localhost
+
+    - name: "Copy data to zos data set"
+      ibm.ibm_zos_core.zos_copy:
+        src: "{{ tmp_file }}"
+        dest: "{{ change }}"
+        remote_src: false
+        encoding:
+          from: UTF-8
+          to: IBM-037
+        force: true
+        dest_data_set:
+          type: seq
+          space_primary: 5
+          space_secondary: 1
+          space_type: k
+          record_length: 80
+      register: result
+
+    - name: Print result
+      ansible.builtin.debug:
+        msg: "{{ result }}"
+
+    - name: Create a sequential data set if it does not exist
+      zos_data_set:
+        name: "{{ merge }}"
+        type: seq
+        state: present
+        replace: True
+
+    # - name: "Diff {{ src }} with {{ change }} and append differences to {{ src }}"
+    #   ddimatos.zos_modules.zos_dconcat:
+    #     src: "{{ src }}"
+    #     change: "{{ change }}"
+    #   register: result
+
+    # - name: Print result
+    #   ansible.builtin.debug:
+    #     msg: "{{ result.stdout_lines }}"
+
+
+
